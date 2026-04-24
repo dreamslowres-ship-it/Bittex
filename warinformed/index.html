@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+  <base href="./">
+  <title>WAR INFORMED · Royal King</title>
+  <link rel="stylesheet" href="./estilo.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;900&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="war-container">
+    <!-- Header con botón de regreso -->
+    <header class="war-header">
+      <button class="back-btn" onclick="window.location.href='../'" aria-label="Volver al clan">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+      </button>
+      <div class="war-title-section">
+        <h1>WAR INFORMED</h1>
+        <p>Sistema de Guerra · Bloques · Bonos · Faltas</p>
+      </div>
+    </header>
+
+    <!-- Zona horaria del usuario -->
+    <div class="timezone-banner" id="timezoneBanner">
+      <span class="tz-icon">◷</span>
+      <span id="timezoneText">Detectando zona horaria...</span>
+    </div>
+
+    <!-- Sección 1: Días y Horarios -->
+    <section class="info-card">
+      <h2 class="card-title">◆ DÍAS Y HORARIO</h2>
+      <div class="days-row">
+        <span class="day-tag obligatorio">SÁBADO</span>
+        <span class="day-tag obligatorio">DOMINGO</span>
+        <span class="day-tag opcional">MIÉRCOLES (opcional)</span>
+      </div>
+      <p class="card-text">Guerra: <strong>18:00 a 22:00</strong> (hora de Bolivia, UTC-4)</p>
+      <p class="card-text micro">Miércoles: solo suma de placas extra, sin faltas.</p>
+    </section>
+
+    <!-- Sección 2: Bloques horarios -->
+    <section class="info-card">
+      <h2 class="card-title">◈ 4 BLOQUES DE 1 HORA</h2>
+      <div class="bloques-grid" id="bloquesGrid">
+        <!-- Se llenará dinámicamente con JS para mostrar solo la hora local -->
+      </div>
+      <p class="card-text micro">Bloque completo = al menos 50 minutos jugados dentro del bloque.</p>
+    </section>
+
+    <!-- Sección 3: Obligaciones -->
+    <section class="info-card">
+      <h2 class="card-title">⬖ OBLIGACIONES</h2>
+      <p class="card-text">Mínimo <strong>2 bloques completos</strong> por día (sábado y domingo).</p>
+      <p class="card-text">Confirmar bloques <strong>antes de las 14:00</strong> (hora de Bolivia) del día de guerra.</p>
+    </section>
+
+    <!-- Sección 4: Calculadora de Bonos -->
+    <section class="info-card">
+      <h2 class="card-title">◆ CALCULADORA DE BONOS</h2>
+      <p class="card-text micro">Selecciona los bloques que jugarás:</p>
+      <div class="calc-row" id="calcBloques">
+        <button class="calc-btn" data-block="B1">B1</button>
+        <button class="calc-btn" data-block="B2">B2</button>
+        <button class="calc-btn" data-block="B3">B3</button>
+        <button class="calc-btn" data-block="B4">B4</button>
+      </div>
+      <div class="calc-result">
+        <span>Placas extra:</span>
+        <span class="calc-value" id="placasValue">0</span>
+      </div>
+      <div class="calc-detail" id="calcDetail"></div>
+    </section>
+
+    <!-- Sección 5: Bonos -->
+    <section class="info-card">
+      <h2 class="card-title">◆ TABLA DE BONOS (por día)</h2>
+      <div class="bonus-list">
+        <div class="bonus-item"><span>B1 completo</span><span>+10 placas</span></div>
+        <div class="bonus-item"><span>B2 completo</span><span>+5 placas</span></div>
+        <div class="bonus-item"><span>B3 completo</span><span>+5 placas</span></div>
+        <div class="bonus-item"><span>B4 completo</span><span>+5 placas</span></div>
+        <div class="bonus-item"><span>4 bloques el mismo día</span><span>+5 extra</span></div>
+        <div class="bonus-item"><span>B1+B2 completos</span><span>+5 extra</span></div>
+        <div class="bonus-item total"><span>Máximo diario</span><span>+35 placas</span></div>
+      </div>
+    </section>
+
+    <!-- Sección 6: Sistema de Faltas (CORREGIDO) -->
+    <section class="info-card">
+      <h2 class="card-title">◆ SISTEMA DE FALTAS</h2>
+      <div class="falta-box">
+        <p class="falta-main"><strong>2 faltas por semana</strong> — se reinician cada <strong>viernes</strong>.</p>
+        <p class="falta-sub">Cada <strong>lunes</strong> se publica la tabla de faltas con nombres y motivos.</p>
+      </div>
+      <div class="falta-item leve">
+        <h3>● Falta leve (1 punto)</h3>
+        <p>No confirmar bloque y no aparecer. Abandonar sin justificar. Confirmar y no asistir.</p>
+      </div>
+      <div class="falta-item grave">
+        <h3>● Falta grave (2 puntos)</h3>
+        <p>Faltar el respeto, sabotear partidas, acumular 2 advertencias por placas bajas.</p>
+      </div>
+      <div class="falta-item advertencia">
+        <h3>● Advertencia por placas</h3>
+        <p>Menos de 100 placas semanales = 1 advertencia. 2 advertencias = 1 falta grave.</p>
+      </div>
+      <div class="expulsion-box">
+        <p>⚠ <strong>2 faltas en una misma semana</strong> = expulsión inmediata.</p>
+      </div>
+    </section>
+
+    <!-- Sección 7: Registro (Aviso) -->
+    <section class="info-card">
+      <h2 class="card-title">⬖ REGISTRO DE GUERRA</h2>
+      <p class="card-text">El <strong>líder</strong> enviará el formato de registro al grupo de WhatsApp cada día de guerra. Copia el mensaje, escribe tu nombre en los bloques correspondientes y reenvíalo.</p>
+    </section>
+
+    <!-- Sección 8: Incentivos -->
+    <section class="info-card">
+      <h2 class="card-title">◆ INCENTIVOS</h2>
+      <p class="card-text">● Top 1 semanal → rol "Élite de Guerra".</p>
+      <p class="card-text">● Confirmar antes de las 12:00 (mediodía, hora Bolivia) → +1 placa por bloque.</p>
+      <p class="card-text">● Relevo: un compañero puede cubrir UN bloque (con aviso previo).</p>
+    </section>
+
+    <footer class="war-footer">
+      <p>Royal King · Herramienta de consulta</p>
+    </footer>
+  </div>
+
+  <script src="./warinformed.js"></script>
+</body>
+</html>
