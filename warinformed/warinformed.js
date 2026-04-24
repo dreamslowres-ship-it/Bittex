@@ -9,9 +9,37 @@
     { id: 'B4', start: [21,0], end: [22,0], bono: 5 }
   ];
 
-  // ================== DETECCIÓN DE PAÍS Y ZONA HORARIA ==================
+  // ================== DETECCIÓN DE PAÍS (MEJORADA) ==================
   function getLocalCountry() {
-    // Intentar obtener el código de región desde el idioma del navegador
+    // 1. Obtener código de país desde la zona horaria (más fiable)
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    // Mapeo común de zonas horarias a códigos de país (formato ISO 3166-1 alpha-2)
+    const tzCountryMap = {
+      'America/La_Paz': 'BO', 'America/Argentina/Buenos_Aires': 'AR', 'America/Argentina/Cordoba': 'AR',
+      'America/Argentina/Salta': 'AR', 'America/Argentina/Tucuman': 'AR', 'America/Argentina/La_Rioja': 'AR',
+      'America/Argentina/San_Juan': 'AR', 'America/Argentina/Mendoza': 'AR', 'America/Argentina/San_Luis': 'AR',
+      'America/Argentina/Rio_Gallegos': 'AR', 'America/Argentina/Ushuaia': 'AR', 'America/Argentina/Catamarca': 'AR',
+      'America/Argentina/Jujuy': 'AR', 'America/Santiago': 'CL', 'Pacific/Easter': 'CL', 'America/Lima': 'PE',
+      'America/Bogota': 'CO', 'America/Caracas': 'VE', 'America/Guayaquil': 'EC', 'Pacific/Galapagos': 'EC',
+      'America/Asuncion': 'PY', 'America/Montevideo': 'UY', 'America/La_Paz': 'BO', 'America/Noronha': 'BR',
+      'America/Sao_Paulo': 'BR', 'America/Manaus': 'BR', 'America/Cuiaba': 'BR', 'America/Porto_Velho': 'BR',
+      'America/Boa_Vista': 'BR', 'America/Eirunepe': 'BR', 'America/Rio_Branco': 'BR', 'America/Mexico_City': 'MX',
+      'America/Cancun': 'MX', 'America/Monterrey': 'MX', 'America/Tijuana': 'MX', 'America/Chicago': 'US',
+      'America/New_York': 'US', 'America/Los_Angeles': 'US', 'America/Denver': 'US', 'America/Phoenix': 'US',
+      'America/Anchorage': 'US', 'Pacific/Honolulu': 'US', 'Europe/Madrid': 'ES', 'America/Guatemala': 'GT',
+      'America/El_Salvador': 'SV', 'America/Tegucigalpa': 'HN', 'America/Managua': 'NI', 'America/Panama': 'PA',
+      'America/Costa_Rica': 'CR', 'America/Santo_Domingo': 'DO', 'America/Havana': 'CU', 'America/Puerto_Rico': 'PR'
+    };
+    const tzCountry = tzCountryMap[tz];
+    
+    if (tzCountry) {
+      try {
+        const displayNames = new Intl.DisplayNames(['es'], { type: 'region' });
+        return displayNames.of(tzCountry);
+      } catch(e) {}
+    }
+    
+    // 2. Fallback: usar el código de región del idioma del navegador
     const locale = navigator.language || 'es';
     const parts = locale.split(/[-_]/);
     if (parts.length > 1 && parts[1].length === 2) {
@@ -21,8 +49,8 @@
         return displayNames.of(region);
       } catch(e) {}
     }
-    // Fallback: extraer del timezone
-    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    
+    // 3. Último fallback: extraer del timezone
     const tzParts = tz.split('/');
     return tzParts[tzParts.length-1].replace(/_/g, ' ');
   }
