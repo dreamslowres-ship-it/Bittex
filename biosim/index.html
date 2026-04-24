@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+  <base href="./">
+  <title>FF Bio Simulator · Royal King</title>
+  <link rel="stylesheet" href="./estilo.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;900&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="biosim-container">
+    <!-- Header -->
+    <header class="biosim-header">
+      <h1>FF BIO SIMULATOR</h1>
+      <p>Diseña tu firma · Límite 50 caracteres</p>
+    </header>
+
+    <!-- Área de previsualización (hasta 3 líneas) -->
+    <div class="preview-section">
+      <div class="preview-label">Vista previa</div>
+      <div id="previewBox" class="preview-box" aria-label="Previsualización de la biografía"></div>
+    </div>
+
+    <!-- Área de entrada de texto -->
+    <div class="input-section">
+      <textarea id="bioInput" class="bio-input" placeholder="Escribe tu biografía con códigos..." maxlength="60" rows="2"></textarea>
+      <div class="input-footer">
+        <div class="counter" id="charCounter">0/50</div>
+      </div>
+    </div>
+
+    <!-- Barra de herramientas de estilo -->
+    <div class="toolbar">
+      <button type="button" class="tool-btn" data-tag="b" title="Negrita [b]texto[/b]"><b>B</b></button>
+      <button type="button" class="tool-btn" data-tag="i" title="Cursiva [i]texto[/i]"><i>I</i></button>
+      <button type="button" class="tool-btn" data-tag="u" title="Subrayado [u]texto[/u]"><u>U</u></button>
+      <button type="button" class="tool-btn" data-tag="s" title="Tachado [s]texto[/s]"><s>S</s></button>
+      
+      <button type="button" id="paletteTabBtn" class="tool-btn active-tab" title="Paleta de colores">🎨</button>
+      <button type="button" id="symbolsTabBtn" class="tool-btn" title="Símbolos especiales">✨</button>
+      <button type="button" id="gradientTabBtn" class="tool-btn" title="Generador de degradados">🌈</button>
+      <button type="button" id="crownTabBtn" class="tool-btn" title="Insertar adorno para letra">፝֟</button>
+    </div>
+
+    <!-- Panel unificado de herramientas -->
+    <div id="toolsPanel" class="tools-panel">
+      <!-- Panel de paleta de colores -->
+      <div id="palettePanel" class="panel-content active">
+        <div class="color-cubes-grid">
+          <button class="color-cube" data-color="FF0000" style="background:#FF0000;" title="Rojo"></button>
+          <button class="color-cube" data-color="FF00FF" style="background:#FF00FF;" title="Rosa"></button>
+          <button class="color-cube" data-color="00FF00" style="background:#00FF00;" title="Verde"></button>
+          <button class="color-cube" data-color="FFD700" style="background:#FFD700;" title="Dorado"></button>
+          <button class="color-cube" data-color="0000FF" style="background:#0000FF;" title="Azul"></button>
+          <button class="color-cube" data-color="FF9000" style="background:#FF9000;" title="Naranja"></button>
+          <button class="color-cube" data-color="FFFF00" style="background:#FFFF00; color:#000;" title="Amarillo"></button>
+          <button class="color-cube" data-color="6E00FF" style="background:#6E00FF;" title="Morado"></button>
+          <button class="color-cube" data-color="FFFFFF" style="background:#FFFFFF; border:1px solid #ccc;" title="Blanco"></button>
+          <button class="color-cube" data-color="00FFFF" style="background:#00FFFF; color:#000;" title="Cian"></button>
+          <button class="color-cube" data-color="000000" style="background:#000000; border:1px solid #fff;" title="Negro"></button>
+          <button class="color-cube" data-color="482B10" style="background:#482B10;" title="Marrón"></button>
+        </div>
+      </div>
+
+      <!-- Panel de símbolos -->
+      <div id="symbolsPanel" class="panel-content">
+        <div class="symbols-grid" id="symbolsGrid"></div>
+      </div>
+
+      <!-- Panel de degradados -->
+      <div id="gradientPanel" class="panel-content">
+        <div class="gradient-controls">
+          <input type="text" id="gradientWord" placeholder="Palabra" maxlength="15" class="gradient-input">
+          <div class="gradient-colors">
+            <input type="color" id="gradientColor1" value="#FF0000">
+            <span>→</span>
+            <input type="color" id="gradientColor2" value="#0000FF">
+          </div>
+          <button type="button" id="applyGradientBtn" class="action-btn">Aplicar degradado</button>
+        </div>
+      </div>
+
+      <!-- Panel de corona (modificado) -->
+      <div id="crownPanel" class="panel-content">
+        <div class="crown-options">
+          <p class="panel-note">Inserta el adorno y luego escribe la letra que lo llevará encima.</p>
+          <button type="button" id="applyCrownBtn" class="action-btn">Insertar ፝֟ para siguiente letra</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botón de copiar -->
+    <div class="copy-section">
+      <button id="copyBtn" class="copy-btn">📋 Copiar código al portapapeles</button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="biosim-footer">
+      <p>Royal King · Herramienta para clanes</p>
+    </footer>
+  </div>
+
+  <script src="./biosim.js"></script>
+</body>
+</html>
