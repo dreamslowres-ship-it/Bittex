@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ASCII Animator Pro Móvil</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <h1>ASCII ANIMATOR MÓVIL</h1>
+</header>
+
+<div class="main-layout">
+    
+    <!-- PANEL EDITOR -->
+    <div class="panel" id="editorPanel">
+        <h2>Configuración</h2>
+        
+        <div class="config-grid">
+            <label class="input-field">
+                Líneas / Frame
+                <input type="number" id="linesPerFrame" value="5" min="1">
+            </label>
+            <label class="input-field">
+                Ancho (Chars)
+                <input type="number" id="charsPerLine" value="10" min="1">
+            </label>
+            <label class="input-field">
+                Velocidad (FPS)
+                <input type="number" id="fps" value="4" min="1" max="60">
+            </label>
+        </div>
+
+        <label class="input-field">
+            Tira de fotogramas ASCII:
+            <textarea id="asciiInput" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Pega tus frames aquí..."></textarea>
+        </label>
+    </div>
+
+    <!-- PANEL DE REPRODUCCIÓN -->
+    <div class="panel">
+        <h2>
+            Visor
+            <button class="btn btn-toggle" id="btnToggleEditor">
+                <img src="assets/toggle.png" alt="Toggle Editor" class="btn-icon">
+                <span>Ocultar Editor</span>
+            </button>
+        </h2>
+        
+        <div class="screen-wrapper" id="screenWrapper">
+            <pre id="display">Listo.</pre>
+        </div>
+        
+        <div class="btn-group">
+            <button class="btn btn-play" id="btnPlay">
+                <img src="assets/play.png" alt="Play" class="btn-icon">
+                <span>Ver</span>
+            </button>
+            <button class="btn btn-pause" id="btnPause">
+                <img src="assets/pause.png" alt="Pause" class="btn-icon">
+                <span>Pausa</span>
+            </button>
+            <button class="btn btn-stop" id="btnStop">
+                <img src="assets/stop.png" alt="Stop" class="btn-icon">
+                <span>Fin</span>
+            </button>
+        </div>
+
+        <div class="footer-stats">
+            <span id="statFrames">Frames: 0</span>
+            <span id="statCurrent">Actual: 0</span>
+        </div>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
