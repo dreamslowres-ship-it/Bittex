@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ASCII Animator Pro</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="toolbox-slots" id="toolboxSlots">
+            <div class="tool-slot"><div class="btn-sprite sprite-mas"></div></div>
+            <div class="tool-slot"></div>
+            <div class="tool-slot"></div>
+            <div class="tool-slot"></div>
+        </div>
+
+        <button class="btn-sprite sprite-sisting" id="btnSettingsTrigger" title="Configuraciones"></button>
+
+        <div class="settings-dropdown" id="settingsDropdown">
+            <div class="dropdown-row">
+                <label for="linesPerFrame">Líneas:</label>
+                <input type="number" id="linesPerFrame" value="5">
+                <span class="unit"></span>
+            </div>
+            <div class="dropdown-row">
+                <label for="charsPerLine">Ancho:</label>
+                <input type="number" id="charsPerLine" value="10">
+                <span class="unit"></span>
+            </div>
+            <div class="dropdown-row">
+                <label for="fps">Velocidad:</label>
+                <input type="number" id="fps" value="4">
+                <span class="unit">FPS</span>
+            </div>
+            <hr class="dropdown-divider">
+            <button class="dropdown-btn" id="btnInfoTrigger">
+                <span class="btn-sprite-inline sprite-info"></span> Manual de Usuario
+            </button>
+        </div>
+    </header>
+
+    <div class="workspace">
+        <div class="visor-container">
+            <div class="screen-wrapper" id="screenWrapper">
+                <pre id="display">Listo.</pre>
+            </div>
+            <div class="controls-bar">
+                <button class="btn-control-wrapper" id="btnPlayPause" title="Play / Pausa">
+                    <div class="btn-sprite sprite-play" id="playPauseIcon"></div>
+                </button>
+                <button class="btn-control-wrapper" id="btnSaveMenu" title="Gestor de Guardado">
+                    <div class="btn-sprite sprite-save"></div>
+                </button>
+                <button class="btn-control-wrapper" id="btnVaultMenu" title="Bóveda de Animaciones">
+                    <div class="btn-sprite sprite-baul"></div>
+                </button>
+                <div class="stats" id="statCurrent">1/1</div>
+            </div>
+        </div>
+
+        <div class="editor-container">
+            <div class="canvas-header">
+                <span id="canvasTitle" class="canvas-title">LIENZO #1</span>
+                <div class="canvas-actions">
+                    <button class="btn btn-small" id="btnDuplicateFrame">DUP</button>
+                    <button class="btn btn-small btn-danger" id="btnDeleteFrame">DEL</button>
+                </div>
+            </div>
+            <textarea id="activeCanvas" class="active-canvas" placeholder="Dibuja aquí..." autocomplete="off" spellcheck="false"></textarea>
+        </div>
+    </div>
+
+    <div class="timeline-wrapper">
+        <button class="btn btn-add-frame" id="btnAddFrame">+</button>
+        <div id="timeline" class="timeline-container"></div>
+    </div>
+
+    <div id="modalSave" class="modal-overlay">
+        <div class="modal-content">
+            <h3>GESTOR DE GUARDADO</h3>
+            <p>Elige una opción para tu proyecto:</p>
+            <div class="modal-actions-vertical">
+                <button class="btn modal-btn" id="btnExportTxt">Exportar archivo (.txt)</button>
+                <label class="btn modal-btn btn-file-label">
+                    Importar archivo (.txt)
+                    <input type="file" id="btnImportTxt" accept=".txt" style="display: none;">
+                </label>
+                <button class="btn modal-btn" id="btnSaveToVault">Guardar en el Baúl de la app</button>
+            </div>
+            <button class="btn btn-danger modal-close" id="btnCloseSaveModal">Cerrar</button>
+        </div>
+    </div>
+
+    <div id="modalVault" class="modal-overlay">
+        <div class="modal-content">
+            <h3>EL BAÚL DE LA APP</h3>
+            <p>Tus proyectos locales guardados (Máximo 4):</p>
+            <div class="vault-slots-container" id="vaultSlotsContainer"></div>
+            <button class="btn btn-danger modal-close" id="btnCloseVaultModal">Cerrar</button>
+        </div>
+    </div>
+
+    <div id="modalInfo" class="modal-overlay">
+        <div class="modal-content modal-scrollable">
+            <h3>MANUAL DE USUARIO</h3>
+            <div class="manual-body">
+                <div class="manual-item">
+                    <div class="btn-sprite-inline sprite-play manual-icon"></div>
+                    <div class="manual-text">
+                        <strong>Botón Play/Pausa:</strong> Inicia o detiene la reproducción cíclica de tu animación directamente en el visor.
+                    </div>
+                </div>
+                <div class="manual-item">
+                    <div class="btn-sprite-inline sprite-save manual-icon"></div>
+                    <div class="manual-text">
+                        <strong>Gestor de Guardado:</strong> Permite descargar tu trabajo en formato .txt, cargar archivos externos o enviarlo a la memoria interna.
+                    </div>
+                </div>
+                <div class="manual-item">
+                    <div class="btn-sprite-inline sprite-baul manual-icon"></div>
+                    <div class="manual-text">
+                        <strong>El Baúl:</strong> Espacio de almacenamiento interno rápido en la app para guardar hasta 4 estados de sesión diferentes.
+                    </div>
+                </div>
+                <div class="manual-item">
+                    <div class="btn-sprite-inline sprite-sisting manual-icon"></div>
+                    <div class="manual-text">
+                        <strong>Engranaje:</strong> Despliega las configuraciones de resolución en caracteres, líneas y control de velocidad (FPS).
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-danger modal-close" id="btnCloseInfoModal">Entendido</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
